@@ -1,0 +1,43 @@
+dataset: 'kittidet'
+save_path: 'ckpt/seg/kittidet/kittidet_sup'
+
+data:
+#  root: '/home/ziyang/Desktop/Datasets/KITTI_Object'
+  root: '/media/SSD/ziyang/Datasets/KITTI_Object'
+  train_mapping: 'data_prepare/kittidet/splits/train.txt'
+  val_mapping: 'data_prepare/kittidet/splits/val.txt'
+  aug_transform: True
+  aug_transform_args:
+    scale_low: 0.95
+    scale_high: 1.05
+    degree_range: [0, 180, 0]
+    shift_range: [1, 0.1, 1]
+  decentralize: True
+ignore_npoint_thresh: 50
+
+epochs: 200
+batch_size: 16
+
+lr: 1.0e-3
+lr_decay: 1.0
+lr_clip: 1.0e-5
+
+bn_momentum: 0.9
+bn_decay: 1.0
+weight_decay: 0.0
+decay_step: 200000
+
+segnet:
+  n_slot: 18
+  n_point: 8192
+  use_xyz: True
+  n_transformer_layer: 2
+  transformer_embed_dim: 128
+  transformer_input_pos_enc: False
+
+loss:
+  use_focal: False
+  focal_loss_params:
+    alpha: 0.25
+    gamma: 2
+  weights: [2.0, 0]   # ['ce', 'dice']

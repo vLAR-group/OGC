@@ -1,0 +1,52 @@
+dataset: 'ogcdr'
+save_path: 'ckpt/flow/ogcdr/ogcdr_unsup'
+
+data:
+#  root: '/home/ziyang/Desktop/Datasets/OGC_DynamicRoom'
+  root: '/media/SSD/ziyang/Datasets/OGC_DynamicRoom'
+  aug_transform: True
+  aug_transform_args:
+    scale_low: 0.95
+    scale_high: 1.05
+    degree_range: [0, 10, 0]
+    shift_range: [0.05, 0.05, 0.05]
+    aug_pc2:
+      degree_range: [0, 0, 0]
+      shift_range: [0.01, 0.01, 0.01]
+
+flownet:
+  npoint: 2048
+  use_instance_norm: False
+  loc_flow_nn: 8
+  loc_flow_rad: 0.05
+  k_decay_fact: 1.0
+model_iters: 4
+
+epochs: 50
+batch_size: 16
+
+lr: 1.0e-3
+lr_decay: 0.5
+lr_clip: 1.0e-5
+
+bn_momentum: 0.9
+bn_decay: 0.5
+weight_decay: 0.0
+decay_step: 200000
+
+loss:
+  weights: [0.75, 0.25]    # ['chamfer', 'smooth']
+  iters_w: [0.5, 0.3, 0.3, 0.3]
+  chamfer_loss_params:
+    loss_norm: 2
+  smooth_loss_params:
+    w_knn: 3.
+    w_ball_q: 1.
+    knn_loss_params:
+      k: 4
+      radius: 0.05
+      loss_norm: 1
+    ball_q_loss_params:
+      k: 8
+      radius: 0.1
+      loss_norm: 1
