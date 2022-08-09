@@ -4,8 +4,12 @@ save_path: 'ckpt/seg/ogcdr/ogcdr_sup'
 data:
 #  root: '/home/ziyang/Desktop/Datasets/OGC_DynamicRoom'
   root: '/media/SSD/ziyang/Datasets/OGC_DynamicRoom'
-  aug_transform: False
-  aug_transform_args: None
+  aug_transform: True
+  aug_transform_args:
+    scale_low: 0.95
+    scale_high: 1.05
+    degree_range: [0, 180, 0]
+    shift_range: [0, 0, 0]
   decentralize: False
 
 epochs: 40
