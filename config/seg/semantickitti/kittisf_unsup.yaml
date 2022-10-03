@@ -1,0 +1,15 @@
+dataset: 'semantickitti'
+save_path: 'ckpt/seg/kittisf/kittisf_unsup'
+
+data:
+  root: '/home/ziyang/Desktop/Datasets/SemanticKITTI'
+  decentralize: True
+ignore_npoint_thresh: 50
+
+segnet:
+  n_slot: 10
+  n_point: 8192
+  use_xyz: True
+  n_transformer_layer: 2
+  transformer_embed_dim: 128
+  transformer_input_pos_enc: False

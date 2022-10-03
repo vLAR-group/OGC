@@ -1,0 +1,17 @@
+dataset: 'kittidet'
+save_path: 'ckpt/seg/kittisf/kittisf_sup'
+
+data:
+  root: '/home/ziyang/Desktop/Datasets/KITTI_Object'
+  train_mapping: 'data_prepare/kittidet/splits/train.txt'
+  val_mapping: 'data_prepare/kittidet/splits/val.txt'
+  decentralize: True
+ignore_npoint_thresh: 50
+
+segnet:
+  n_slot: 15
+  n_point: 8192
+  use_xyz: True
+  n_transformer_layer: 2
+  transformer_embed_dim: 128
+  transformer_input_pos_enc: False

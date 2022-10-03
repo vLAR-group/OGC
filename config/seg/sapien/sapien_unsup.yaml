@@ -1,0 +1,54 @@
+dataset: 'sapien'
+save_path: 'ckpt/seg/sapien/sapien_unsup'
+random_seed: 10
+
+data:
+  root: '/home/ziyang/Desktop/Datasets/MBS_SAPIEN'
+  aug_transform_args:
+    scale_low: 0.95
+    scale_high: 1.05
+    degree_range: [0, 180, 0]
+    shift_range: [0, 0, 0]
+  decentralize: False
+aug_transform_epoch: 20
+predflow_path: flowstep3d
+ignore_npoint_thresh: 0
+
+epochs: 40
+batch_size: 32
+
+lr: 1.0e-3
+lr_decay: 0.7
+lr_clip: 1.0e-5
+
+bn_momentum: 0.9
+bn_decay: 1.0
+weight_decay: 0.0
+decay_step: 200000
+
+segnet:
+  n_slot: 8
+  n_point: 512
+  use_xyz: True
+  n_transformer_layer: 2
+  transformer_embed_dim: 128
+  transformer_input_pos_enc: False
+
+loss:
+  weights: [10.0, 0.1, 0.1]   # ['dynamic', 'smooth', 'invariance]
+  start_steps: [0, 1000, 0]   # ['dynamic', 'smooth', 'invariance]
+  dynamic_loss_params:
+    loss_norm: 2
+  smooth_loss_params:
+    w_knn: 3.
+    w_ball_q: 1.
+    knn_loss_params:
+      k: 8
+      radius: 0.1
+      loss_norm: 1
+    ball_q_loss_params:
+      k: 16
+      radius: 0.2
+      loss_norm: 1
+  invariance_loss_params:
+    loss_norm: 2
