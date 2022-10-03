@@ -1,5 +1,6 @@
 # OGC: Unsupervised 3D Object Segmentation from Rigid Dynamics of Point Clouds
 
+
 ## 1. Environment
 
 Please first install a **GPU-supported pytorch** version which fits your machine.
@@ -126,11 +127,11 @@ You can download all our pre-trained models from [Dropbox](https://www.dropbox.c
 
 Train the self-supervised scene flow networks:
 ```shell script
-# SAPIEN dataset
+# SAPIEN 
 python train_flow.py config/flow/sapien/sapien_unsup.yaml
-# OGC-DR dataset
+# OGC-DR 
 python train_flow.py config/flow/ogcdr/ogcdr_unsup.yaml
-# OGC-DRSV dataset
+# OGC-DRSV 
 python train_flow.py config/flow/ogcdrsv/ogcdrsv_unsup.yaml
 ```
 For KITTI-SF dataset, we directly employ the pre-trained model released by [FlowStep3D](https://github.com/yairkit/flowstep3d).
@@ -139,13 +140,13 @@ For KITTI-SF dataset, we directly employ the pre-trained model released by [Flow
 
 Evaluate and save the scene flow estimations.
 ```shell script
-# SAPIEN dataset
+# SAPIEN 
 python test_flow.py config/flow/sapien/sapien_unsup.yaml --split ${SPLIT} --save
-# OGC-DR dataset
+# OGC-DR 
 python test_flow.py config/flow/ogcdr/ogcdr_unsup.yaml --split ${SPLIT} --test_batch_size 12 --test_model_iters 5 --save
-# OGC-DRSV dataset
+# OGC-DRSV 
 python test_flow.py config/flow/ogcdrsv/ogcdrsv_unsup.yaml --split ${SPLIT} --test_batch_size 12 --test_model_iters 5 --save
-# KITTI-SF dataset
+# KITTI-SF 
 python test_flow_kittisf.py config/flow/kittisf/kittisf_unsup.yaml --split ${SPLIT} --test_model_iters 5 --save
 ```
 `${SPLIT}` can be train/val/test for SAPIEN & OGC-DR/OGC-DRSV, train/val for KITTI-SF.
@@ -158,28 +159,28 @@ python test_flow_kittisf.py config/flow/kittisf/kittisf_unsup.yaml --split ${SPL
 Alternate the segmentation network training and scene flow improvement for *R* rounds. 
 In each `${ROUND}` (starting from 1):
 ```shell script
-# SAPIEN dataset: first R-1 rounds
+# SAPIEN: first R-1 rounds
 python train_seg.py config/seg/sapien/sapien_unsup_woinv.yaml --round ${ROUND}
 python oa_icp.py config/seg/sapien/sapien_unsup_woinv.yaml --split ${SPLIT} --round ${ROUND} --save
-# SAPIEN dataset: the last round
+# SAPIEN: the last round
 python train_seg.py config/seg/sapien/sapien_unsup.yaml --round ${ROUND}
 
-# OGC-DR dataset: first R-1 rounds
+# OGC-DR: first R-1 rounds
 python train_seg.py config/seg/ogcdr/ogcdr_unsup_woinv.yaml --round ${ROUND}
 python oa_icp.py config/seg/ogcdr/ogcdr_unsup_woinv.yaml --split ${SPLIT} --round ${ROUND} --test_batch_size 24 --save
-# OGC-DR dataset: the last round
+# OGC-DR: the last round
 python train_seg.py config/seg/ogcdr/ogcdr_unsup.yaml --round ${ROUND}
 
-# OGC-DRSV dataset: first R-1 rounds
+# OGC-DRSV: first R-1 rounds
 python train_seg.py config/seg/ogcdrsv/ogcdrsv_unsup_woinv.yaml --round ${ROUND}
 python oa_icp.py config/seg/ogcdrsv/ogcdrsv_unsup_woinv.yaml --split ${SPLIT} --round ${ROUND} --test_batch_size 24 --save
-# OGC-DRSV dataset: the last round
+# OGC-DRSV: the last round
 python train_seg.py config/seg/ogcdrsv/ogcdrsv_unsup.yaml --round ${ROUND}
 
-# KITTI-SF dataset: first R-1 rounds
+# KITTI-SF: first R-1 rounds
 python train_seg.py config/seg/kittisf/kittisf_unsup_woinv.yaml --round ${ROUND}
 python oa_icp.py config/seg/kittisf/kittisf_unsup_woinv.yaml --split ${SPLIT} --round ${ROUND} --test_batch_size 4 --save
-# KITTI-SF dataset: the last round
+# KITTI-SF: the last round
 python train_seg.py config/seg/kittisf/kittisf_unsup.yaml --round ${ROUND}
 ```
 When performing scene flow improvement, `${SPLIT}` needs to traverse train/val/test for SAPIEN & OGC-DR/OGC-DRSV, train/val for KITTI-SF.
@@ -187,17 +188,17 @@ When performing scene flow improvement, `${SPLIT}` needs to traverse train/val/t
 ### Test
 
 ```shell script
-# SAPIEN dataset
+# SAPIEN 
 python test_seg.py config/seg/sapien/sapien_unsup.yaml --split test --round ${ROUND}
-# OGC-DR dataset
+# OGC-DR 
 python test_seg.py config/seg/ogcdr/ogcdr_unsup.yaml --split test --round ${ROUND} --test_batch_size 16
-# OGC-DRSV dataset
+# OGC-DRSV 
 python test_seg.py config/seg/ogcdrsv/ogcdrsv_unsup.yaml --split test --round ${ROUND} --test_batch_size 16
-# KITTI-SF dataset
+# KITTI-SF 
 python test_seg.py config/seg/kittisf/kittisf_unsup.yaml --split val --round ${ROUND} --test_batch_size 8
-# KITTI-Det dataset
+# KITTI-Det 
 python test_seg.py config/seg/kittidet/kittisf_unsup.yaml --split val --round ${ROUND} --test_batch_size 8
-# SemanticKITTI dataset
+# SemanticKITTI 
 python test_seg.py config/seg/semantickitti/kittisf_unsup.yaml --round ${ROUND} --test_batch_size 8
 ```
 `${ROUND}` can be 1/2/3/..., and we take **2 rounds** as default in our experiments.
@@ -223,33 +224,33 @@ You can train the segmentation network with full annotations.
 ### Train
 
 ```shell script
-# SAPIEN dataset
+# SAPIEN 
 python train_seg_sup.py config/seg/sapien/sapien_sup.yaml
-# OGC-DR dataset 
+# OGC-DR
 python train_seg_sup.py config/seg/ogcdr/ogcdr_sup.yaml
-# OGC-DRSV dataset 
+# OGC-DRSV
 python train_seg_sup.py config/seg/ogcdrsv/ogcdrsv_sup.yaml
-# KITTI-SF dataset
+# KITTI-SF 
 python train_seg_sup.py config/seg/kittisf/kittisf_sup.yaml
-# KITTI-Det dataset
+# KITTI-Det 
 python train_seg_sup.py config/seg/kittidet/kittidet_sup.yaml
 ```
 
 ### Test 
 
 ```shell script
-# SAPIEN dataset
+# SAPIEN 
 python test_seg.py config/seg/sapien/sapien_sup.yaml --split test
-# OGC-DR dataset 
+# OGC-DR
 python test_seg.py config/seg/ogcdr/ogcdr_sup.yaml --split test --test_batch_size 16
-# OGC-DRSV dataset 
+# OGC-DRSV
 python test_seg.py config/seg/ogcdrsv/ogcdrsv_sup.yaml --split test --test_batch_size 16
-# KITTI-SF dataset
+# KITTI-SF 
 python test_seg.py config/seg/kittisf/kittisf_sup.yaml --split val --test_batch_size 8
-# KITTI-Det dataset
+# KITTI-Det 
 python test_seg.py config/seg/kittidet/kittisf_sup.yaml --split val --test_batch_size 8
 python test_seg.py config/seg/kittidet/kittidet_sup.yaml --split val --test_batch_size 8
-# SemanticKITTI dataset
+# SemanticKITTI 
 python test_seg.py config/seg/semantickitti/kittisf_sup.yaml --test_batch_size 8
 ```
 
