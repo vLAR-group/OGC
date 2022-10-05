@@ -51,12 +51,12 @@ Then put them into your `${SAPIEN}` path.
 ### (2) OGC-DR (Dynamic Room) & OGC-DRSV (Single-View Dynamic Room)
 
 Please download the complete datasets from links below:
-- OGC-DR: [Dropbox](https://www.dropbox.com/s/67rzl2ku37e2urt/OGC_DynamicRoom_SingleView.zip?dl=0)
-- OGC-DRSV: [Dropbox](https://www.dropbox.com/s/guni0d87phls4sd/OGC_DynamicRoom.zip?dl=0)
+- OGC-DR: [Dropbox](https://www.dropbox.com/s/guni0d87phls4sd/OGC_DynamicRoom.zip?dl=0)
+- OGC-DRSV: [Dropbox](https://www.dropbox.com/s/67rzl2ku37e2urt/OGC_DynamicRoom_SingleView.zip?dl=0)
 
 Alternatively, you can generate the dataset by yourself.
 
-**OGC-DR:** lease first download the [ShapeNet Core v1](https://shapenet.cs.stanford.edu/shapenet/obj-zip/ShapeNetCore.v1.zip).
+**OGC-DR:** Please first download the [ShapeNet Core v1](https://shapenet.cs.stanford.edu/shapenet/obj-zip/ShapeNetCore.v1.zip).
 Select the archives according to object categories specified in `data_prepare/ogcdr/meta.yaml` and unzip them into your `${OGC_DR}/ShapeNet_mesh` path.
 Then run the following script to generate the dataset.
 ```shell script
