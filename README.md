@@ -1,4 +1,18 @@
+[![arXiv](https://img.shields.io/badge/arXiv-xxxx.xxxxx-b31b1b.svg)]()
+
 # OGC: Unsupervised 3D Object Segmentation from Rigid Dynamics of Point Clouds
+
+This is the official repository of
+**OGC: Unsupervised 3D Object Segmentation from Rigid Dynamics of Point Clouds** (accpeted at NeurIPS 2022).\
+[Ziyang Song](https://szy-young.github.io/), [Bo Yang](https://yang7879.github.io/)\
+[**paper**]()
+
+We propose the first unsupervised 3D object segmentation method, learning from dynamic motion patterns in point cloud sequences.
+<img src="figures/overview.png" alt="drawing" width="800"/>
+
+- Object part instance segmentation:
+- Object segmentation in indoor scenes:
+- Object segmentation in real-world outdoor scenes:
 
 
 ## 1. Environment
@@ -253,6 +267,18 @@ python test_seg.py config/seg/kittidet/kittidet_sup.yaml --split val --test_batc
 # SemanticKITTI 
 python test_seg.py config/seg/semantickitti/kittisf_sup.yaml --test_batch_size 8
 ```
+
+
+## Citation
+If you find our work useful in your research, please consider citing:
+
+      @article{song2022ogc,
+      title={OGC: Unsupervised 3D Object Segmentation from Rigid Dynamics of Point Clouds},
+      author={Song, Ziyang and Yang, Bo},
+      journal={NeurIPS},
+      year={2022}
+    }
+
 
 ## Acknowledgements
 
