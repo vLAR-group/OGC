@@ -271,8 +271,8 @@ python test_seg.py config/seg/semantickitti/kittisf_sup.yaml --test_batch_size 8
 ## Citation
 If you find our work useful in your research, please consider citing:
     
-    @inproceedings{song2022ogc,
-      title={OGC: Unsupervised 3D Object Segmentation from Rigid Dynamics of Point Clouds},
+    @inproceedings{song2022,
+      title={{OGC: Unsupervised 3D Object Segmentation from Rigid Dynamics of Point Clouds}},
       author={Song, Ziyang and Yang, Bo},
       booktitle={NeurIPS},
       year={2022}
