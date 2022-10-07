@@ -171,12 +171,12 @@ class Trainer(object):
                                 filename=osp.join(self.exp_base, self.checkpoint_name),
                                 bestname=osp.join(self.exp_base, self.best_name))
 
-                            # Also save intermediate epochs
-                            save_checkpoint(
-                                checkpoint_state(self.flownet),
-                                is_best,
-                                filename=osp.join(self.exp_base, 'epoch_%03d'%(self.cur_epoch)),
-                                bestname=osp.join(self.exp_base, self.best_name))
+                            # # Also save intermediate epochs
+                            # save_checkpoint(
+                            #     checkpoint_state(self.flownet),
+                            #     is_best,
+                            #     filename=osp.join(self.exp_base, 'epoch_%03d'%(self.cur_epoch)),
+                            #     bestname=osp.join(self.exp_base, self.best_name))
 
                         pbar = tqdm.tqdm(
                             total=len(train_loader), leave=False, desc='train')

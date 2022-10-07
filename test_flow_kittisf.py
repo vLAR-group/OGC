@@ -62,8 +62,7 @@ if __name__ == '__main__':
     # Save flow predictions
     if args.save:
         # Path to save flow predictions
-        # SAVE_DIR = osp.join(data_root, 'flow_preds/flowstep3d')
-        SAVE_DIR = osp.join(data_root, 'flow_preds/flowstep3d_iter2')
+        SAVE_DIR = osp.join(data_root, 'flow_preds/flowstep3d')
         os.makedirs(SAVE_DIR, exist_ok=True)
 
 

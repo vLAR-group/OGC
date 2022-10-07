@@ -52,7 +52,6 @@ if __name__ == '__main__':
                          k_decay_fact=0.5).cuda()
 
     # Load the trained model weights
-    # weight_path = osp.join(args.save_path, 'epoch_010.pth.tar')
     weight_path = osp.join(args.save_path, 'best.pth.tar')
     flownet.load_state_dict(torch.load(weight_path)['model_state'])
     flownet.cuda().eval()
@@ -71,7 +70,6 @@ if __name__ == '__main__':
         assert batch_size % n_frame == 0, \
             'Frame pairs of one scene should be in the same batch, otherwise very inconvenient for saving!'
         # Path to save flow predictions
-        # SAVE_DIR = osp.join(data_root, 'flow_preds/flowstep3d_epoch010')
         SAVE_DIR = osp.join(data_root, 'flow_preds/flowstep3d')
         os.makedirs(SAVE_DIR, exist_ok=True)
         # Write information about "view_sel" into a meta file

@@ -1,6 +1,3 @@
-import sys
-sys.path.append('/home/ziyang/Desktop/Projects/OGC')
-
 import os
 import os.path as osp
 import numpy as np
