@@ -6,13 +6,28 @@ This is the official repository of
 [**OGC: Unsupervised 3D Object Segmentation from Rigid Dynamics of Point Clouds**]() (accpeted at NeurIPS 2022).\
 [Ziyang Song](https://szy-young.github.io/), [Bo Yang](https://yang7879.github.io/)
 
+### Overview
+
 We propose the first unsupervised 3D object segmentation method, learning from dynamic motion patterns in point cloud sequences.
-<img src="figures/overview.png" alt="drawing" width="800"/>
 
-- Object part instance segmentation:
-- Object segmentation in indoor scenes:
-- Object segmentation in real-world outdoor scenes:
+<img src="figures/overview.png" alt="drawing" width=800/>
 
+Our method demonstrates promising results on various scenarios:
+- **Object part instance segmentation**
+
+<img src="figures/sapien.gif" alt="drawing" width=1000/>
+
+- **Object segmentation in indoor scenes**
+
+<img src="figures/indoor.gif" alt="drawing" width=1000/>
+
+- **Object segmentation in outdoor scenes**
+
+<img src="figures/outdoor.gif" alt="drawing" width=800/>
+
+### [Full demo (Youtube)](https://www.youtube.com/watch?v=dZBjvKWJ4K0)
+
+<a href="https://www.youtube.com/watch?v=dZBjvKWJ4K0"><img src="figures/OGC_thumbnail.png" width=500></a>
 
 ## 1. Environment
 
