@@ -23,7 +23,7 @@ Our method demonstrates promising results on various scenarios:
 
 - **Object segmentation in outdoor scenes**
 
-<img src="figures/outdoor.gif" alt="drawing" width=800/>
+<img src="figures/outdoor.gif" alt="drawing" width=1000/>
 
 ### [Full demo (Youtube)](https://www.youtube.com/watch?v=dZBjvKWJ4K0)
 
