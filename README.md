@@ -1,5 +1,6 @@
 [![arXiv](https://img.shields.io/badge/arXiv-2210.04458-b31b1b.svg)](https://arxiv.org/abs/2210.04458)
 ![code visitors](https://visitor-badge.glitch.me/badge?page_id=vLAR-group/OGC)
+[![Twitter Follow](https://img.shields.io/twitter/follow/vLAR_Group?style=social)](https://twitter.com/vLAR_Group)
 
 # OGC: Unsupervised 3D Object Segmentation from Rigid Dynamics of Point Clouds (NeurIPS 2022)
 [Ziyang Song](https://szy-young.github.io/), [Bo Yang](https://yang7879.github.io/)
