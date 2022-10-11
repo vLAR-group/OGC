@@ -27,7 +27,7 @@ Our method demonstrates promising results on various scenarios:
 
 ### [Full demo (Youtube)](https://www.youtube.com/watch?v=dZBjvKWJ4K0)
 
-<a href="https://www.youtube.com/watch?v=dZBjvKWJ4K0"><img src="figures/OGC_thumbnail.png" width=500></a>
+<p align="center"> <a href="https://www.youtube.com/watch?v=dZBjvKWJ4K0"><img src="figures/OGC_thumbnail.png" width=500></a> </p>
 
 ## 1. Environment
 
