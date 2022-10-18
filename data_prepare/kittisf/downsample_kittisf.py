@@ -33,15 +33,17 @@ if predflow_path is not None:
 # Setup the dataset
 from datasets.dataset_kittisf import KITTISceneFlowDataset
 mapping_path = 'data_prepare/kittisf/splits/all.txt'
+view_sels = [[0, 1], [1, 0]]
 dataset = KITTISceneFlowDataset(data_root=data_root,
                                 mapping_path=mapping_path,
                                 downsampled=False,
+                                view_sels=view_sels,
                                 predflow_path=predflow_path)
 
 n_scenes = len(dataset)
 pbar = tqdm.tqdm(total=n_scenes)
 for sid in range(n_scenes):
-    pcs, segms, flows = dataset[sid]
+    pcs, segms, flows, _ = dataset[sid]
     pc_org, segm_org, flow_org = pcs[0], segms[0], flows[0]
 
     fps_idx = fps_downsample(pc_org, n_sample_point=n_sample_point)
