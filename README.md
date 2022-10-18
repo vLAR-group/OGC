@@ -1,9 +1,9 @@
-[![arXiv](https://img.shields.io/badge/arXiv-xxxx.xxxxx-b31b1b.svg)]()
+[![arXiv](https://img.shields.io/badge/arXiv-2210.04458-b31b1b.svg)](https://arxiv.org/abs/2210.04458)
+![code visitors](https://visitor-badge.glitch.me/badge?page_id=vLAR-group/OGC)
+[![License CC BY-NC-SA 4.0](https://img.shields.io/badge/license-CC4.0-blue.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode)
+[![Twitter Follow](https://img.shields.io/twitter/follow/vLAR_Group?style=social)](https://twitter.com/vLAR_Group)
 
-# OGC: Unsupervised 3D Object Segmentation from Rigid Dynamics of Point Clouds
-
-This is the official repository of
-[**OGC: Unsupervised 3D Object Segmentation from Rigid Dynamics of Point Clouds**]() (accpeted at NeurIPS 2022).\
+## OGC: Unsupervised 3D Object Segmentation from Rigid Dynamics of Point Clouds (NeurIPS 2022)
 [Ziyang Song](https://szy-young.github.io/), [Bo Yang](https://yang7879.github.io/)
 
 ### Overview
@@ -27,7 +27,7 @@ Our method demonstrates promising results on various scenarios:
 
 ### [Full demo (Youtube)](https://www.youtube.com/watch?v=dZBjvKWJ4K0)
 
-<a href="https://www.youtube.com/watch?v=dZBjvKWJ4K0"><img src="figures/OGC_thumbnail.png" width=500></a>
+<p align="center"> <a href="https://www.youtube.com/watch?v=dZBjvKWJ4K0"><img src="figures/OGC_thumbnail.png" width=500></a> </p>
 
 ## 1. Environment
 
