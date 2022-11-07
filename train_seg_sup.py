@@ -37,7 +37,9 @@ class Trainer(object):
         self.checkpoint_name, self.best_name = "current", "best"
         self.cur_epoch = 0
         self.training_best, self.eval_best = {}, {}
-        self.viz = SummaryWriter(osp.join(exp_base, 'log'))
+        log_dir = osp.join(exp_base, 'log')
+        os.makedirs(log_dir, exist_ok=True)
+        self.viz = SummaryWriter(log_dir)
 
 
     def _train_it(self, it, batch, aug_transform=False):
