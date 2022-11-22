@@ -4,4 +4,3 @@ pyyaml
 pyquaternion
 tensorboardX
 scikit-learn
-open3d
