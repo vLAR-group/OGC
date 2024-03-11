@@ -6,6 +6,15 @@
 ## OGC: Unsupervised 3D Object Segmentation from Rigid Dynamics of Point Clouds (NeurIPS 2022)
 [Ziyang Song](https://szy-young.github.io/), [Bo Yang](https://yang7879.github.io/)
 
+
+### !Updates:
+
+New contents in the extension of OGC have been included in this repo:
+- [x] Support for Waymo Open dataset.
+- [x] A multi-frame co-segmentation algorithm to leverage multi-frame inputs in testing.
+- [ ] Support for SparseConv & Point Transformer backbones in the object segmentation network.
+
+
 ### Overview
 
 We propose the first unsupervised 3D object segmentation method, learning from dynamic motion patterns in point cloud sequences.
@@ -143,6 +152,23 @@ Then run the following script to extract 8192-point **front-view** point cloud, 
 python data_prepare/semantickitti/process_semantickitti.py ${SEMANTIC_KITTI}
 ```
 
+### (6) Waymo Open
+
+Please first register at the [Waymo Open Dataset](https://waymo.com/open/download/), then download the [raw data](https://console.cloud.google.com/storage/browser/waymo_open_dataset_scene_flow;tab=objects?prefix=&forceOnObjectsSortingFiltering=false).
+1. Process raw data into point clouds. Please carefully follow the instructions in [OpenPCDet](https://github.com/open-mmlab/OpenPCDet/blob/master/docs/GETTING_STARTED.md#waymo-open-dataset). 
+You need to install [waymo-open-dataset](https://github.com/waymo-research/waymo-open-dataset) and [OpenPCDet](https://github.com/open-mmlab/OpenPCDet) here.
+2. Extract groundtruth scene flow. Please follow the instructions in [DCA-SRSFE](https://github.com/leolyj/DCA-SRSFE).
+3. Generate groundtruth segmentations from bounding box annotations:
+```shell script
+python data_prepare/waymo/process_waymo.py --data_root $WAYMO_RAW --save_root $WAYMO --split $SPLIT
+```
+4. Downsample all point clouds to 8192-point:
+```shell script
+python data_prepare/waymo/downsample_waymo.py --data_root $WAYMO --save_root ${WAYMO}_downsampled --split $SPLIT
+# After extracting flow estimations in the following, come back here to downsample flow estimations
+python data_prepare/waymo/downsample_waymo.py --data_root $WAYMO --save_root ${WAYMO}_downsampled --split $SPLIT --predflow_path flowstep3d
+```
+
 
 ## 3. Pre-trained models
 
@@ -176,8 +202,10 @@ python test_flow.py config/flow/ogcdr/ogcdr_unsup.yaml --split ${SPLIT} --test_b
 python test_flow.py config/flow/ogcdrsv/ogcdrsv_unsup.yaml --split ${SPLIT} --test_batch_size 12 --test_model_iters 5 --save
 # KITTI-SF 
 python test_flow_kittisf.py config/flow/kittisf/kittisf_unsup.yaml --split ${SPLIT} --test_model_iters 5 --save
+# Waymo Open
+python test_flow_waymo.py config/flow/waymo/kittisf_unsup.yaml --split ${SPLIT} --use_odometry --bound --test_model_iters 5 --save
 ```
-`${SPLIT}` can be train/val/test for SAPIEN & OGC-DR/OGC-DRSV, train/val for KITTI-SF.
+`${SPLIT}` can be train/val/test for SAPIEN & OGC-DR/OGC-DRSV, train/val for KITTI-SF & Waymo Open.
 
 
 ## 5. Unsupervised segmentation
@@ -210,6 +238,9 @@ python train_seg.py config/seg/kittisf/kittisf_unsup_woinv.yaml --round ${ROUND}
 python oa_icp.py config/seg/kittisf/kittisf_unsup_woinv.yaml --split ${SPLIT} --round ${ROUND} --test_batch_size 4 --save
 # KITTI-SF: the last round
 python train_seg.py config/seg/kittisf/kittisf_unsup.yaml --round ${ROUND}
+
+# Waymo Open: only 1 round
+python train_seg_waymo.py config/seg/waymo/waymo_unsup.yaml --round 1
 ```
 When performing scene flow improvement, `${SPLIT}` needs to traverse train/val/test for SAPIEN & OGC-DR/OGC-DRSV, train/val for KITTI-SF.
 
@@ -228,6 +259,8 @@ python test_seg.py config/seg/kittisf/kittisf_unsup.yaml --split val --round ${R
 python test_seg.py config/seg/kittidet/kittisf_unsup.yaml --split val --round ${ROUND} --test_batch_size 8
 # SemanticKITTI 
 python test_seg.py config/seg/semantickitti/kittisf_unsup.yaml --round ${ROUND} --test_batch_size 8
+# Waymo Open
+python test_seg_waymo.py config/seg/waymo/waymo_unsup.yaml --split val --round 1 --test_batch_size 8
 ```
 `${ROUND}` can be 1/2/3/..., and we take **2 rounds** as default in our experiments.
 Specify `--save` to save the estimations. 
@@ -262,6 +295,8 @@ python train_seg_sup.py config/seg/ogcdrsv/ogcdrsv_sup.yaml
 python train_seg_sup.py config/seg/kittisf/kittisf_sup.yaml
 # KITTI-Det 
 python train_seg_sup.py config/seg/kittidet/kittidet_sup.yaml
+# Waymo Open
+python train_seg_waymo_sup.py config/seg/waymo/waymo_sup.yaml 
 ```
 
 ### Test 
@@ -280,16 +315,31 @@ python test_seg.py config/seg/kittidet/kittisf_sup.yaml --split val --test_batch
 python test_seg.py config/seg/kittidet/kittidet_sup.yaml --split val --test_batch_size 8
 # SemanticKITTI 
 python test_seg.py config/seg/semantickitti/kittisf_sup.yaml --test_batch_size 8
+# Waymo Open
+python test_seg_waymo.py config/seg/waymo/waymo_sup.yaml --split val --test_batch_size 8
 ```
+
+
+## 7. Multi-frame co-segmentation
+
+```shell script
+# SAPIEN dataset
+python vote.py config/seg/sapien/sapien_unsup.yaml --split test --round $ROUND
+# OGC-DR dataset
+python vote.py config/seg/ogcdr/ogcdr_unsup.yaml --split test --round $ROUND --test_batch_size 16
+# OGC-DRSV dataset
+python vote.py config/seg/ogcdrsv/ogcdrsv_unsup.yaml --split test --round $ROUND --test_batch_size 16
+```
+Use `--time_window_size` to control the frame range used for multi-frame co-segmentation. 
 
 
 ## Citation
 If you find our work useful in your research, please consider citing:
     
-    @inproceedings{song2022,
+    @article{song2022,
       title={{OGC: Unsupervised 3D Object Segmentation from Rigid Dynamics of Point Clouds}},
       author={Song, Ziyang and Yang, Bo},
-      booktitle={NeurIPS},
+      journal={NeurIPS},
       year={2022}
     }
 

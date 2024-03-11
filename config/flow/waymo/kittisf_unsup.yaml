@@ -1,0 +1,13 @@
+dataset: 'waymo'
+save_path: 'ckpt/flow/kittisf/kittisf_unsup/epoch=23.ckpt'
+
+data:
+  root: '/home/ziyang/Desktop/Datasets/Waymo'
+#  root: '/media/SSD/ziyang/Datasets/Waymo'
+
+flownet:
+  npoint: 8192
+  use_instance_norm: False
+  loc_flow_nn: 16
+  loc_flow_rad: 1.5
+  k_decay_fact: 1.0

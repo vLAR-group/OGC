@@ -1,0 +1,16 @@
+PROCESSED_DATA_TAG: 'waymo_processed_data_v0_5_0'
+SCENE_FLOW_TAG: 'scene_flow_label'
+
+POINT_CLOUD_RANGE: [-75.2, -75.2, -2, 75.2, 75.2, 4]
+
+DATA_SPLIT: {
+    'train': train,
+    'test': val
+}
+
+SAMPLED_INTERVAL: {
+    'train': 20,
+    'test': 1
+}
+
+FILTER_EMPTY_BOXES: True
