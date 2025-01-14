@@ -52,7 +52,7 @@ cd ..
 
 Install other dependencies:
 ```shell script
-pip install -r requirements
+pip install -r requirements.txt
 ```
 
 **(Optional)** Install Open3D for the visualization of point cloud segmentation:
