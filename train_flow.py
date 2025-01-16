@@ -75,7 +75,7 @@ class Trainer(object):
             flow_preds = self.flownet(pc1, pc2, pc1, pc2, iters=self.model_iters)
             loss, loss_dict = self.criterion(pc1, pc2, flow_preds)
             epe_dict = epe_metric(flow, flow_preds)
-            loss_dict = loss_dict | epe_dict
+            loss_dict.update(epe_dict)
 
         # Backward
         try:
@@ -110,7 +110,7 @@ class Trainer(object):
                     flow_preds = self.flownet(pc1, pc2, pc1, pc2, iters=self.model_iters)
                     loss, loss_dict = self.criterion(pc1, pc2, flow_preds)
                     epe_dict = epe_metric(flow, flow_preds)
-                    loss_dict = loss_dict | epe_dict
+                    loss_dict.update(epe_dict)
 
                 total_loss += loss.item()
                 count += 1
